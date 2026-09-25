@@ -3,7 +3,7 @@
 
   // Navnet på workeren, og subdomenet den får: <name>.workers.dev.
   // Bytt til noe som er deres.
-  "name": "webapp",
+  "name": "moviemate",
   "main": "src/worker.tsx",
 
   // Pinner hvordan runtimen oppfører seg. Å flytte datoen fram kan endre
@@ -34,7 +34,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "webapp-db",
+      "database_name": "moviemate-db",
       "database_id": "__change_me__",
       "migrations_dir": "drizzle/migrations",
       // Drizzle v1 legger hver migrasjon i sin egen mappe. Uten dette

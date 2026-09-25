@@ -1,7 +1,7 @@
 {
-  "name": "webapp-starter",
+  "name": "moviemate",
   "version": "1.0.0",
-  "description": "Starter for Webapplikasjoner 2026 (RedwoodSDK, React 19, Vite 8, Drizzle/D1, Tailwind 4, Vitest, Playwright)",
+  "description": "Personlig filmtracker med TMDB",
   "type": "module",
   "private": true,
   "license": "MIT",

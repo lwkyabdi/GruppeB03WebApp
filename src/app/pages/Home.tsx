@@ -14,13 +14,9 @@ export function Home() {
 
   return (
     <main className="mx-auto max-w-2xl p-8 font-sans">
-      <h1 className="text-3xl font-bold">Webapplikasjoner 2026</h1>
+      <h1 className="text-3xl font-bold">MovieMate</h1>
       <p className="mt-2 text-slate-600">
-        Startprosjektet virker. Nå kan dere begynne å bygge.
-      </p>
-
-      <p className="mt-6 text-sm text-slate-500">
-        Rendret på serveren {now}. Last siden på nytt, så endrer tallet seg.
+        Din personlige filmtracker
       </p>
 
       {/* Samme klokke, men rendret i nettleseren. Ser dere to ulike tidspunkt,
