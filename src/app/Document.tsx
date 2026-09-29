@@ -1,4 +1,4 @@
-// src/app/Document.tsx
+import { Header } from "./components/layout/Header";
 import styles from "./styles.css?url";
 
 export const Document: React.FC<{ children: React.ReactNode }> = ({
@@ -13,6 +13,7 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
       <link rel="stylesheet" href={styles} />
     </head>
     <body>
+      <Header />
       <div id="root">{children}</div>
       <script>import("/src/client.tsx")</script>
     </body>
