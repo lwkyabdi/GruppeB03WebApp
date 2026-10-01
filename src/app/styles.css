@@ -1,2 +1,20 @@
 /* src/app/styles.css */
 @import "tailwindcss";
+
+@layer components {
+  .movie-card {
+    @apply rounded-lg border p-4 shadow-sm;
+  }
+
+  .movie-card-poster {
+    @apply mb-2 flex h-48 items-center justify-center bg-slate-200 text-slate-500;
+  }
+
+  .movie-card-title {
+    @apply font-semibold;
+  }
+
+  .movie-card-rating {
+    @apply text-sm text-slate-500;
+  }
+}
