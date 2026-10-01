@@ -1,4 +1,4 @@
-# MovieMate – webapp
+# MovieMate
 
 Webapplikasjon for MovieMate, bygget med RedwoodSDK, React 19 og Drizzle/D1.
 Lar brukeren søke etter filmer, lagre dem i en watchlist, markere favoritter,
