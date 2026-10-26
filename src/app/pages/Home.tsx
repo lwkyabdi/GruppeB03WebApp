@@ -1,4 +1,4 @@
-import { MovieCard } from "../components/movie/MovieCard";
+import { MovieCard } from "@/features/movies/components/MovieCard";
 
 export function Home() {
   return (
