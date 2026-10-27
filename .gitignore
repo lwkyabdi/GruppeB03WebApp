@@ -144,3 +144,5 @@ vite.config.ts.timestamp-*
 
 # Wrangler / Cloudflare lokal state
 .wrangler/
+
+.dev.vars
