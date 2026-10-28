@@ -17,3 +17,14 @@ export async function searchMovies(
 
   return response.json();
 }
+//testen i terminaalen for Interstellar med kommandoen: 
+// @'
+// import { searchMovies } from "./src/features/movies/tmdb-client.ts";
+
+// const data = await searchMovies(
+//   "Interstellar",
+//   process.env.TMDB_READ_ACCESS_TOKEN
+// );
+
+// console.log(JSON.stringify(data, null, 2));
+// '@ | node --env-file=.dev.vars --import=tsx --input-type=module
