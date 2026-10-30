@@ -3,6 +3,7 @@ import { render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
+import { movieRoutes } from "@/features/movies/movie-routes";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -15,6 +16,8 @@ export type AppContext = {};
 const app = defineApp([
   // Middleware. Kjører for hver forespørsel, i rekkefølgen de står.
   setCommonHeaders(),
+
+  ...movieRoutes,
 
   // API-rute. Ligger UTENFOR render(), så svaret er akkurat det handleren
   // returnerer: JSON, uten HTML-skall rundt.
