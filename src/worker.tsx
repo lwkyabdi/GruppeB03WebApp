@@ -4,6 +4,7 @@ import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
 import { movieRoutes } from "@/features/movies/movie-routes";
+import { SearchPage } from "@/features/movies/pages/SearchPage";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -27,6 +28,7 @@ const app = defineApp([
 
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
   render(Document, [route("/", Home)]),
+    route("/search", SearchPage),
 ]);
 
 export default { fetch: app.fetch };
