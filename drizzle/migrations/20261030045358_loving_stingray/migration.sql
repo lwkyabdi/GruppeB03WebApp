@@ -1,12 +1,12 @@
 CREATE TABLE `account` (
 	`id` text PRIMARY KEY,
-	`account_id` text NOT NULL,
-	`provider_id` text NOT NULL,
+	`account_id` text,
+	`provider_id` text,
 	`access_token` text,
 	`refresh_token` text,
-	`idToken` text,
-	`access_token_due_date` integer NOT NULL,
-	`refresh_token_due_date` integer NOT NULL,
+	`id_token` text,
+	`access_token_expires_at` integer,
+	`refresh_token_expires_at` integer,
 	`scope` text,
 	`password` text,
 	`user_id` text NOT NULL,
@@ -18,8 +18,9 @@ CREATE TABLE `account` (
 CREATE TABLE `session` (
 	`id` text PRIMARY KEY,
 	`token` text NOT NULL UNIQUE,
-	`dueDate` integer NOT NULL,
+	`expires_at` integer NOT NULL,
 	`ip_address` text,
+	`user_agent` text,
 	`user_id` text NOT NULL,
 	`created_at` integer NOT NULL,
 	`updated_at` integer NOT NULL,
@@ -39,8 +40,8 @@ CREATE TABLE `users` (
 CREATE TABLE `verification` (
 	`id` text PRIMARY KEY,
 	`identifier` text NOT NULL,
-	`value` text NOT NULL UNIQUE,
-	`due_date` integer NOT NULL,
+	`value` text NOT NULL,
+	`expires_at` integer NOT NULL,
 	`created_at` integer NOT NULL,
 	`updated_at` integer NOT NULL
 );
