@@ -28,3 +28,16 @@ export async function searchMovies(
 
 // console.log(JSON.stringify(data, null, 2));
 // '@ | node --env-file=.dev.vars --import=tsx --input-type=module
+export async function fetchPopularMovies(token: string): Promise<unknown> {
+  const response = await fetch("https://api.themoviedb.org/3/movie/popular", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`TMDB-kallet feilet: ${response.status}`);
+  }
+
+  return response.json();
+}
