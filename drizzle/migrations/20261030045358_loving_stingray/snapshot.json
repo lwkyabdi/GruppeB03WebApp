@@ -1,7 +1,7 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "id": "96b95f71-9bb3-49e4-9761-cb27a49128f9",
+  "id": "23f41668-de4b-4802-bb64-79090f63665b",
   "prevIds": [
     "00000000-0000-0000-0000-000000000000"
   ],
@@ -34,7 +34,7 @@
     },
     {
       "type": "text",
-      "notNull": true,
+      "notNull": false,
       "autoincrement": false,
       "default": null,
       "generated": null,
@@ -44,7 +44,7 @@
     },
     {
       "type": "text",
-      "notNull": true,
+      "notNull": false,
       "autoincrement": false,
       "default": null,
       "generated": null,
@@ -78,27 +78,27 @@
       "autoincrement": false,
       "default": null,
       "generated": null,
-      "name": "idToken",
+      "name": "id_token",
       "entityType": "columns",
       "table": "account"
     },
     {
       "type": "integer",
-      "notNull": true,
+      "notNull": false,
       "autoincrement": false,
       "default": null,
       "generated": null,
-      "name": "access_token_due_date",
+      "name": "access_token_expires_at",
       "entityType": "columns",
       "table": "account"
     },
     {
       "type": "integer",
-      "notNull": true,
+      "notNull": false,
       "autoincrement": false,
       "default": null,
       "generated": null,
-      "name": "refresh_token_due_date",
+      "name": "refresh_token_expires_at",
       "entityType": "columns",
       "table": "account"
     },
@@ -178,7 +178,7 @@
       "autoincrement": false,
       "default": null,
       "generated": null,
-      "name": "dueDate",
+      "name": "expires_at",
       "entityType": "columns",
       "table": "session"
     },
@@ -189,6 +189,16 @@
       "default": null,
       "generated": null,
       "name": "ip_address",
+      "entityType": "columns",
+      "table": "session"
+    },
+    {
+      "type": "text",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "user_agent",
       "entityType": "columns",
       "table": "session"
     },
@@ -328,7 +338,7 @@
       "autoincrement": false,
       "default": null,
       "generated": null,
-      "name": "due_date",
+      "name": "expires_at",
       "entityType": "columns",
       "table": "verification"
     },
@@ -463,15 +473,6 @@
       "name": "users_email_unique",
       "entityType": "uniques",
       "table": "users"
-    },
-    {
-      "columns": [
-        "value"
-      ],
-      "nameExplicit": false,
-      "name": "verification_value_unique",
-      "entityType": "uniques",
-      "table": "verification"
     }
   ],
   "renames": []
