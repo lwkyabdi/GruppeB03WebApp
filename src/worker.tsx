@@ -6,6 +6,7 @@ import { Home } from "@/app/pages/Home";
 import { SessionUser } from "./features/auth/auth-types";
 import { requireUser, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
+import { LoginPage } from "./features/auth/pages/LoginPage";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -36,7 +37,10 @@ const app = defineApp([
   ),
 
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
-  render(Document, [route("/", Home)]),
+  render(Document, [
+    route("/", Home),
+    route("/login", LoginPage),
+  ]),
 ]);
 
 export default { fetch: app.fetch };
