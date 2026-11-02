@@ -12,24 +12,20 @@ export function MovieCard({
   releaseDate,
 }: MovieCardProps) {
   return (
-    <article>
+    <article className="movie-card">
       {posterPath ? (
-        <img
+        <img className="movie-poster" loading="lazy" width={500} height={750}
           src={`https://image.tmdb.org/t/p/w500${posterPath}`}
           alt={`Filmplakat for ${title}`}
         />
       ) : (
-        <div>
-          Ingen plakat tilgjengelig
+        <div className="movie-poster poster-placeholder">Ingen plakat tilgjengelig
         </div>
       )}
-      <div>
-        <h3>{title}</h3>
-        <p>
-          {releaseDate ? releaseDate.slice(0, 4) : "Utgivelsesår ukjent"}
+      <div className="movie-info"><h3>{title}</h3>
+        <p className="movie-year">{releaseDate ? releaseDate.slice(0, 4) : "Utgivelsesår ukjent"}
         </p>
-        <p>
-          TMDB-rating: {rating === undefined ? "–" : `${rating.toFixed(1)} / 10`}
+        <p className="movie-rating">TMDB-rating: {rating === undefined ? "–" : `${rating.toFixed(1)} / 10`}
         </p>
       </div>
     </article>
