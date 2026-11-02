@@ -1,6 +1,7 @@
 import { RouteMiddleware } from "rwsdk/router";
 import { auth } from "./auth";
 import { toSessionUser } from "./auth-types";
+import { unauthorizedError } from "./auth-guard";
 
 
 export const setUser: RouteMiddleware = async ({ ctx, request }) => {
@@ -16,14 +17,7 @@ export const setUser: RouteMiddleware = async ({ ctx, request }) => {
 export const requireUser: RouteMiddleware = ({ ctx }) => {
   if (!ctx.user) {
     return Response.json(
-      {
-        ok: false,
-        error: {
-          code: "401",
-          message: "Du må være innlogget. Logg inn ved å gå til /login",
-          fieldErrors: {},
-        },
-      },
+      { ok: false, error: unauthorizedError() },
       { status: 401 },
     );
   }
