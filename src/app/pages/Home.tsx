@@ -1,4 +1,4 @@
-﻿import { env } from "cloudflare:workers";
+import { env } from "cloudflare:workers";
 import { MovieCard } from "@/features/movies/components/MovieCard";
 import { getPopularMovies } from "@/features/movies/movie-service";
 import type { Movie } from "@/features/movies/tmdb-schema";
@@ -18,15 +18,15 @@ export async function Home() {
   }
 
   return (
-    <main>
-      <h1>MovieMate</h1>
+    <main className="page-container">
+      <section className="hero"><h1>Hva vil du se i kveld?</h1>
       <p>Finn filmer og bygg din egen watchlist.</p>
-      <a href="/search">Finn en film</a>
+      <a href="/search" className="button">Finn en film</a></section>
 
-      <h2>Populære filmer</h2>
-      {error && <p role="alert">{error}</p>}
+      <h2 className="section-title">Populære filmer</h2>
+      {error && <p role="alert" className="error-message">{error}</p>}
       {!error && movies.length === 0 && <p>Ingen filmer å vise akkurat nå.</p>}
-      <ul>
+      <ul className="movie-grid">
         {movies.slice(0, 6).map((movie) => (
           <li key={movie.id}>
             <MovieCard

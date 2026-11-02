@@ -1,3 +1,4 @@
+import { Button } from "@/app/components/ui/Button";
 import { MovieCard } from "../components/MovieCard";
 import { env } from "cloudflare:workers";
 import { searchMovieResults } from "../movie-service";
@@ -26,17 +27,16 @@ export async function SearchPage({ request }: { request: Request }) {
   }
 
   return (
-    <main>
+    <main className="page-container">
       <div>
         <h1>Finn din neste film</h1>
-        <p>Søk etter filmer og utforsk resultatene fra TMDB.</p>
+        <p className="page-intro">Søk etter filmer og utforsk resultatene fra TMDB.</p>
 
-        <form action="/search" method="get">
+        <form className="search-form" action="/search" method="get">
           <label htmlFor="movie-search">
             Filmtittel
           </label>
-          <div>
-            <input
+          <div className="search-controls"><input
               id="movie-search"
               name="query"
               type="search"
@@ -44,35 +44,30 @@ export async function SearchPage({ request }: { request: Request }) {
               defaultValue={query}
               required
             />
-            <button
-              type="submit"
-            >
-              Søk
-            </button>
+            <Button type="submit">Søk</Button>
           </div>
         </form>
 
         {error && (
-          <p role="alert">
+          <p role="alert" className="error-message">
             {error}
           </p>
         )}
 
         {!query && (
-          <p>
-            Skriv en filmtittel for å søke.
+          <p className="notice">Skriv en filmtittel for å søke.
           </p>
         )}
 
         {query && !error && (
           <section aria-labelledby="search-results">
-            <h2 id="search-results">
+            <h2 id="search-results" className="section-title">
               Resultater for «{query}»
             </h2>
             {movies.length === 0 ? (
-              <p>Ingen filmer funnet. Prøv en annen tittel.</p>
+              <p className="notice">Ingen filmer funnet. Prøv en annen tittel.</p>
             ) : (
-              <ul>
+              <ul className="movie-grid">
                 {movies.map((movie) => (
                   <li key={movie.id}>
                     <MovieCard

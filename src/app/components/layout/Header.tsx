@@ -2,9 +2,9 @@ import { Navigation } from "./Navigation";
 
 export function Header() {
   return (
-    <header>
-      <h2>MovieMate</h2>
+    <header className="site-header"><div className="header-inner">
+      <h2><a href="/" className="brand">MovieMate</a></h2>
       <Navigation />
-    </header>
+    </div></header>
   );
 }
