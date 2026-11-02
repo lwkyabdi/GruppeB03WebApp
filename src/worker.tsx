@@ -3,6 +3,8 @@ import { render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
+import { movieRoutes } from "@/features/movies/movie-routes";
+import { SearchPage } from "@/features/movies/pages/SearchPage";
 import { SessionUser } from "./features/auth/auth-types";
 import { requireUser, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
@@ -29,6 +31,8 @@ const app = defineApp([
   ({ ctx }) => Response.json({ ok: true, data: ctx.user }),
 ]),
 
+  ...movieRoutes,
+
   // API-rute. Ligger UTENFOR render(), så svaret er akkurat det handleren
   // returnerer: JSON, uten HTML-skall rundt.
   route("/api/status", () =>
@@ -36,7 +40,10 @@ const app = defineApp([
   ),
 
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
-  render(Document, [route("/", Home)]),
+  render(Document, [
+    route("/", Home),
+    route("/search", SearchPage),
+  ]),
 ]);
 
 export default { fetch: app.fetch };

@@ -4,6 +4,7 @@
 interface __BaseEnv_Env {
 	DB: D1Database;
 	ASSETS: Fetcher;
+	TMDB_READ_ACCESS_TOKEN: string;
 	BETTER_AUTH_SECRET: string;
 	BETTER_AUTH_URL: string;
 	TMDB_TOKEN: string;
@@ -19,6 +20,7 @@ type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };
 declare namespace NodeJS {
+	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "TMDB_READ_ACCESS_TOKEN">> {}
 	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "TMDB_TOKEN">> {}
 }
 
