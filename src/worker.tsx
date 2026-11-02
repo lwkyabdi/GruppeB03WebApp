@@ -27,8 +27,10 @@ const app = defineApp([
   ),
 
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
-  render(Document, [route("/", Home)]),
+  render(Document, [
+    route("/", Home),
     route("/search", SearchPage),
+  ]),
 ]);
 
 export default { fetch: app.fetch };
