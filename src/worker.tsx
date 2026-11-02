@@ -7,6 +7,7 @@ import { SessionUser } from "./features/auth/auth-types";
 import { requireUser, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
 import { LoginPage } from "./features/auth/pages/LoginPage";
+import { RegisterPage } from "./features/auth/pages/RegisterPages";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -40,6 +41,7 @@ const app = defineApp([
   render(Document, [
     route("/", Home),
     route("/login", LoginPage),
+    route("/register", RegisterPage),
   ]),
 ]);
 
