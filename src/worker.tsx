@@ -9,6 +9,8 @@ import { SearchPage } from "@/features/movies/pages/SearchPage";
 import { SessionUser } from "./features/auth/auth-types";
 import { requireUser, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
+import { watch } from "node:fs";
+import { watchlistRoutes } from "@/features/watchlist/watchlist-routes";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -24,6 +26,7 @@ const app = defineApp([
   // Middleware. Kjører for hver forespørsel, i rekkefølgen de står.
   setCommonHeaders(),
   setUser,
+  ...watchlistRoutes,
   ...authRoutes,
   route("/api/status", () => Response.json({ status: "ok", version: "0.1.0" })),
 
