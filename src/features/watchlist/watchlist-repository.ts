@@ -94,3 +94,5 @@ export function createWatchlistRepository(_db: DB): WatchlistRepository {
         },
     };
 }
+
+export const repository = createWatchlistRepository(db);

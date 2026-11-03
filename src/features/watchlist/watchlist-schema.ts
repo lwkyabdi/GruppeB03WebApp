@@ -17,7 +17,7 @@ export const updateWatchlistSchema = createWatchlistSchema
 .partial();
 
 // Query-parametere kommer som tekst: ?status=watching&favorite=true
-export const listParamSchema = z.object({
+export const listParamsSchema = z.object({
     status: z.enum(WATCHLIST_STATUS, "Ugyldig status").optional(),
     favorite: z
     .enum(["true", "false"], "Favorite må være true eller false")
@@ -27,4 +27,4 @@ export const listParamSchema = z.object({
 
 export type CreateWatchlistInput = z.infer<typeof createWatchlistSchema>;
 export type UpdateWatchlistInput = z.infer<typeof updateWatchlistSchema>;
-export type ListWatchlistParams = z.infer<typeof listParamSchema>;
+export type ListWatchlistParams = z.infer<typeof listParamsSchema>;
