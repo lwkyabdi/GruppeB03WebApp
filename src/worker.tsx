@@ -1,14 +1,17 @@
 import { MovieDetailsPage } from "@/features/movies/pages/MovieDetailsPage";
 import { defineApp } from "rwsdk/worker";
-import { render, route } from "rwsdk/router";
+import { layout, render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
 import { movieRoutes } from "@/features/movies/movie-routes";
 import { SearchPage } from "@/features/movies/pages/SearchPage";
 import { SessionUser } from "./features/auth/auth-types";
-import { requireUser, setUser } from "./features/auth/middleware";
+import { ifLoggedIn, requireUser, requireUserPage, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
+import { LoginPage } from "./features/auth/pages/LoginPage";
+import { RegisterPage } from "./features/auth/pages/RegisterPages";
+import { AppLayout } from "./app/components/layout/AppLayout";
 import { watch } from "node:fs";
 import { watchlistRoutes } from "@/features/watchlist/watchlist-routes";
 
@@ -45,9 +48,14 @@ const app = defineApp([
 
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
   render(Document, [
-    route("/", Home),
-    route("/search", SearchPage),
-    route("/movies/:id", MovieDetailsPage),
+    layout(AppLayout, [
+      route("/", [requireUserPage, Home]),
+      route("/login", [ifLoggedIn, LoginPage]),
+      route("/register", [ifLoggedIn, RegisterPage]),
+      route("/", Home),
+      route("/search", SearchPage),
+      route("/movies/:id", MovieDetailsPage),
+    ]),
   ]),
 ]);
 

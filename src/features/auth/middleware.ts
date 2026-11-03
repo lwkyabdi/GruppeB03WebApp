@@ -31,3 +31,12 @@ export const requireUserPage: RouteMiddleware = ({ ctx }) => {
     });
   }
 };
+
+export const ifLoggedIn: RouteMiddleware = ({ ctx }) => {
+  if (ctx.user) {
+    return new Response(null, {
+      status: 302,
+      headers: { Location: "/" },
+    });
+  }
+};

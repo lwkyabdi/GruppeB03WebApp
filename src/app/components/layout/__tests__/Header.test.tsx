@@ -5,7 +5,7 @@ import { render, screen } from "@testing-library/react";
 import { Header } from "../Header";
 
 test("headeren viser MovieMate", () => {
-  render(<Header />);
+  render(<Header user={null} />);
   expect(screen.getByRole("heading", { name: "MovieMate" }))
     .toBeInTheDocument();
 });
