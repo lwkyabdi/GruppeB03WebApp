@@ -1,3 +1,4 @@
+import { MovieDetailsPage } from "@/features/movies/pages/MovieDetailsPage";
 import { defineApp } from "rwsdk/worker";
 import { render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
@@ -46,6 +47,7 @@ const app = defineApp([
   render(Document, [
     route("/", Home),
     route("/search", SearchPage),
+    route("/movies/:id", MovieDetailsPage),
   ]),
 ]);
 
