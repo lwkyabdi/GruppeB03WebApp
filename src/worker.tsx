@@ -1,14 +1,19 @@
+import { MovieDetailsPage } from "@/features/movies/pages/MovieDetailsPage";
 import { defineApp } from "rwsdk/worker";
 import { layout, render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
+import { movieRoutes } from "@/features/movies/movie-routes";
+import { SearchPage } from "@/features/movies/pages/SearchPage";
 import { SessionUser } from "./features/auth/auth-types";
 import { ifLoggedIn, requireUser, requireUserPage, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
 import { LoginPage } from "./features/auth/pages/LoginPage";
 import { RegisterPage } from "./features/auth/pages/RegisterPages";
 import { AppLayout } from "./app/components/layout/AppLayout";
+import { watch } from "node:fs";
+import { watchlistRoutes } from "@/features/watchlist/watchlist-routes";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -24,6 +29,7 @@ const app = defineApp([
   // Middleware. Kjører for hver forespørsel, i rekkefølgen de står.
   setCommonHeaders(),
   setUser,
+  ...watchlistRoutes,
   ...authRoutes,
   route("/api/status", () => Response.json({ status: "ok", version: "0.1.0" })),
 
@@ -31,6 +37,8 @@ const app = defineApp([
   requireUser,
   ({ ctx }) => Response.json({ ok: true, data: ctx.user }),
 ]),
+
+  ...movieRoutes,
 
   // API-rute. Ligger UTENFOR render(), så svaret er akkurat det handleren
   // returnerer: JSON, uten HTML-skall rundt.
@@ -44,6 +52,9 @@ const app = defineApp([
       route("/", [requireUserPage, Home]),
       route("/login", [ifLoggedIn, LoginPage]),
       route("/register", [ifLoggedIn, RegisterPage]),
+      route("/", Home),
+      route("/search", SearchPage),
+      route("/movies/:id", MovieDetailsPage),
     ]),
   ]),
 ]);

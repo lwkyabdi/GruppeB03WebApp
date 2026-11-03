@@ -1,16 +1,35 @@
-// Lagd dummy komponent for å vise filmkort.
-
 type MovieCardProps = {
+  id: number;
   title: string;
   rating?: number;
+  posterPath?: string | null;
+  releaseDate?: string;
 };
 
-export function MovieCard({ title, rating }: MovieCardProps) {
+export function MovieCard({
+  id,
+  title,
+  rating,
+  posterPath,
+  releaseDate,
+}: MovieCardProps) {
   return (
-    <div className="movie-card">
-      <div className="movie-card-poster">Ingen plakat</div>
-      <h3 className="movie-card-title">{title}</h3>
-      <p className="movie-card-rating">Rating: {rating ?? "–"}</p>
-    </div>
+    <article className="movie-card"><a href={`/movies/${id}`} className="movie-card-link">
+      {posterPath ? (
+        <img className="movie-poster" loading="lazy" width={500} height={750}
+          src={`https://image.tmdb.org/t/p/w500${posterPath}`}
+          alt={`Filmplakat for ${title}`}
+        />
+      ) : (
+        <div className="movie-poster poster-placeholder">Ingen plakat tilgjengelig
+        </div>
+      )}
+      <div className="movie-info"><h3>{title}</h3>
+        <p className="movie-year">{releaseDate ? releaseDate.slice(0, 4) : "Utgivelsesår ukjent"}
+        </p>
+        <p className="movie-rating">TMDB-rating: {rating === undefined ? "–" : `${rating.toFixed(1)} / 10`}
+        </p>
+      </div>
+    </a></article>
   );
 }
