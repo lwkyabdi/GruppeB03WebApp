@@ -41,3 +41,16 @@ export async function fetchPopularMovies(token: string): Promise<unknown> {
 
   return response.json();
 }
+
+export async function fetchMovieDetails(id: number, token: string): Promise<unknown> {
+  const response = await fetch(`https://api.themoviedb.org/3/movie/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    throw new Error(`TMDB-kallet feilet: ${response.status}`);
+  }
+
+  return response.json();
+}

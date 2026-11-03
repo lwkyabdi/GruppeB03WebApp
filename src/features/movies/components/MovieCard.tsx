@@ -1,4 +1,5 @@
 type MovieCardProps = {
+  id: number;
   title: string;
   rating?: number;
   posterPath?: string | null;
@@ -6,13 +7,14 @@ type MovieCardProps = {
 };
 
 export function MovieCard({
+  id,
   title,
   rating,
   posterPath,
   releaseDate,
 }: MovieCardProps) {
   return (
-    <article className="movie-card">
+    <article className="movie-card"><a href={`/movies/${id}`} className="movie-card-link">
       {posterPath ? (
         <img className="movie-poster" loading="lazy" width={500} height={750}
           src={`https://image.tmdb.org/t/p/w500${posterPath}`}
@@ -28,6 +30,6 @@ export function MovieCard({
         <p className="movie-rating">TMDB-rating: {rating === undefined ? "–" : `${rating.toFixed(1)} / 10`}
         </p>
       </div>
-    </article>
+    </a></article>
   );
 }

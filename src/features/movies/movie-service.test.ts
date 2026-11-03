@@ -1,11 +1,12 @@
-﻿// Hele testkoden i denne filen er generert av ChatGPT.
+// Hele testkoden i denne filen er generert av ChatGPT.
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { searchMovies } from "./tmdb-client";
-import { searchMovieResults } from "./movie-service";
+import { searchMovies, fetchMovieDetails } from "./tmdb-client";
+import { searchMovieResults, getMovieDetails } from "./movie-service";
 
 // Erstatter TMDB-klienten, slik at testene ikke bruker nettverk eller ekte token.
 vi.mock("./tmdb-client", () => ({
   searchMovies: vi.fn(),
+  fetchMovieDetails: vi.fn(),
 }));
 
 const movie = {
@@ -19,6 +20,7 @@ const movie = {
 
 beforeEach(() => {
   vi.mocked(searchMovies).mockReset();
+  vi.mocked(fetchMovieDetails).mockReset();
 });
 
 describe("searchMovieResults", () => {
@@ -52,5 +54,30 @@ describe("searchMovieResults", () => {
 
     await expect(searchMovieResults("Interstellar", "test-token"))
       .rejects.toThrow("TMDB-søket feilet: 503");
+  });
+});
+
+describe("getMovieDetails", () => {
+  it("henter valgt film og returnerer validerte data", async () => {
+    vi.mocked(fetchMovieDetails).mockResolvedValue(movie);
+    await expect(getMovieDetails(157336, "test-token")).resolves.toEqual(movie);
+    expect(fetchMovieDetails).toHaveBeenCalledWith(157336, "test-token");
+  });
+
+  it("returnerer null når filmen ikke finnes", async () => {
+    vi.mocked(fetchMovieDetails).mockResolvedValue(null);
+    await expect(getMovieDetails(157336, "test-token")).resolves.toBeNull();
+  });
+
+  it("avviser ugyldige filmdata", async () => {
+    vi.mocked(fetchMovieDetails).mockResolvedValue({ ...movie, id: "feil" });
+    await expect(getMovieDetails(157336, "test-token"))
+      .rejects.toThrow("TMDB returnerte ugyldige filmdata");
+  });
+
+  it("sender feil fra TMDB videre", async () => {
+    vi.mocked(fetchMovieDetails).mockRejectedValue(new Error("TMDB-kallet feilet: 503"));
+    await expect(getMovieDetails(157336, "test-token"))
+      .rejects.toThrow("TMDB-kallet feilet: 503");
   });
 });

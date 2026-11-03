@@ -1,5 +1,5 @@
-import { searchMovies, fetchPopularMovies } from "./tmdb-client";
-import { tmdbSearchSchema, type Movie } from "./tmdb-schema";
+import { searchMovies, fetchPopularMovies, fetchMovieDetails } from "./tmdb-client";
+import { tmdbSearchSchema, tmdbMovieSchema, type Movie } from "./tmdb-schema";
 
 export async function searchMovieResults(
   query: string,
@@ -23,4 +23,16 @@ export async function getPopularMovies(token: string): Promise<Movie[]> {
   }
 
   return result.data.results;
+}
+
+export async function getMovieDetails(id: number, token: string): Promise<Movie | null> {
+  const response = await fetchMovieDetails(id, token);
+  if (response === null) return null;
+
+  const result = tmdbMovieSchema.safeParse(response);
+  if (!result.success) {
+    throw new Error("TMDB returnerte ugyldige filmdata");
+  }
+
+  return result.data;
 }
