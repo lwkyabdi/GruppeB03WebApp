@@ -88,6 +88,18 @@
     color: white;
   }
 
+  .navigation span {
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    color: #cbc9dc;
+  }
+
+  .navigation span:hover {
+    background: #252738;
+    color: white;
+  }
+
   .page-container {
     max-width: 1200px;
     margin: auto;

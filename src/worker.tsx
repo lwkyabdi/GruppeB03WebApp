@@ -52,7 +52,6 @@ const app = defineApp([
       route("/", [requireUserPage, Home]),
       route("/login", [ifLoggedIn, LoginPage]),
       route("/register", [ifLoggedIn, RegisterPage]),
-      route("/", Home),
       route("/search", SearchPage),
       route("/movies/:id", MovieDetailsPage),
     ]),

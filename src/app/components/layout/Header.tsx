@@ -1,5 +1,5 @@
 import type { SessionUser } from "@/features/auth/auth-types";
-import { LogoutButton } from "@/features/auth/components/LogOutButton";
+import { Navigation } from "./Navigation";
 
 export function Header({ user }: { user: SessionUser | null }) {
   return (
@@ -7,23 +7,7 @@ export function Header({ user }: { user: SessionUser | null }) {
       <h2 className="text-xl font-bold">
         <a href="/">MovieMate</a>
       </h2>
-      <nav className="flex items-center gap-4 text-sm">
-        {user ? (
-          <>
-            <span>{user.name}</span>
-            <LogoutButton />
-          </>
-        ) : (
-          <>
-            <a className="underline" href="/login">
-              Logg inn
-            </a>
-            <a className="underline" href="/register">
-              Registrer deg
-            </a>
-          </>
-        )}
-      </nav>
+      <Navigation user={user} />
     </header>
   );
 }
