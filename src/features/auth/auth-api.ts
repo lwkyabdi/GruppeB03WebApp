@@ -38,3 +38,16 @@ export async function signUp(input: {
     }
 };
 
+export async function signOut(): 
+    Promise<AuthResult> {
+    try {
+        const { error } = await authClient.signOut();
+        if (error) {
+            return { ok: false, error: { message: "Kunne ikke logge ut, prøv igjen." } };
+        }
+        return { ok: true };
+    } catch (error) {
+        console.error(error);
+        return { ok: false, error: { message: "Ingen kontakt med server, prøv igjen." } };
+    }
+}

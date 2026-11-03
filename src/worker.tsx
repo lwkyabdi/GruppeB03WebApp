@@ -1,5 +1,5 @@
 import { defineApp } from "rwsdk/worker";
-import { render, route } from "rwsdk/router";
+import { layout, render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
@@ -8,6 +8,7 @@ import { requireUser, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
 import { LoginPage } from "./features/auth/pages/LoginPage";
 import { RegisterPage } from "./features/auth/pages/RegisterPages";
+import { AppLayout } from "./app/components/layout/AppLayout";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -39,9 +40,11 @@ const app = defineApp([
 
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
   render(Document, [
-    route("/", Home),
-    route("/login", LoginPage),
-    route("/register", RegisterPage),
+    layout(AppLayout, [
+      route("/", Home),
+      route("/login", LoginPage),
+      route("/register", RegisterPage),
+    ]),
   ]),
 ]);
 

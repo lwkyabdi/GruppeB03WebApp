@@ -1,0 +1,41 @@
+"use client";
+
+import { useState } from "react";
+import { signOut } from "../auth-api";
+
+export function LogoutButton() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onClick() {
+    setIsLoading(true);
+    setError(null);
+
+    const result = await signOut();
+    setIsLoading(false);
+
+    if (!result.ok) {
+      setError(result.error.message);
+      return;
+    }
+    window.location.href = "/login";
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={isLoading}
+        className="rounded-md border border-slate-300 px-3 py-1 hover:bg-slate-50 disabled:opacity-50"
+      >
+        {isLoading ? "Logger ut..." : "Logg ut"}
+      </button>
+      {error && (
+        <span role="alert" className="text-red-600">
+          {error}
+        </span>
+      )}
+    </>
+  );
+}
