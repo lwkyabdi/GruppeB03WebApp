@@ -34,7 +34,7 @@ export function createWatchlistRepository(_db: DB): WatchlistRepository {
     return {
         async create(data) {
             try {
-                const entry = await db.insert(watchlistEntry).values(data).returning().get();
+                const entry = await _db.insert(watchlistEntry).values(data).returning().get();
                 return ResultHandler.success(entry);
             } catch (error) {
                 if (isUniqueVioltaion(error)) {
