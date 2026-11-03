@@ -15,7 +15,7 @@ export interface WatchlistRepository {
     create(data: NewWatchlistEntry): Promise<Result<WatchlistEntry>>;
     // null er ingen oppføring med denne id-en.
     findById(id: string): Promise<Result<WatchlistEntry | null>>;
-    findByTmbdId(userId: string, tmdbId: number): Promise<Result<WatchlistEntry | null>>;
+    findByTmdbId(userId: string, tmdbId: number): Promise<Result<WatchlistEntry | null>>;
     findMany(params: FindManyParams): Promise<Result<WatchlistEntry[]>>;
     update(id: string, userid: string, data: UpdateWatchlistEntry): Promise<Result<WatchlistEntry>>;
     remove(id: string, userId: string): Promise<Result<void>>;
@@ -55,7 +55,7 @@ export function createWatchlistRepository(_db: DB): WatchlistRepository {
             );
         },
 
-        findByTmbdId(userId, tmdbId) {
+        findByTmdbId(userId, tmdbId) {
             return executeDbOperation(
                 async () =>
                 (await _db.select().from(watchlistEntry)
