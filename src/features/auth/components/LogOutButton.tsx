@@ -27,12 +27,12 @@ export function LogoutButton() {
         type="button"
         onClick={onClick}
         disabled={isLoading}
-        className="rounded-md border border-slate-300 px-3 py-1 hover:bg-slate-50 disabled:opacity-50"
+        className= "rounded-md border px-3 py-1 hover:bg-slate-50 disabled:opacity-10"
       >
         {isLoading ? "Logger ut..." : "Logg ut"}
       </button>
       {error && (
-        <span role="alert" className="text-red-600">
+        <span role="alert" className="text-red-500">
           {error}
         </span>
       )}
