@@ -30,7 +30,7 @@ export async function Home() {
         {movies.slice(0, 6).map((movie) => (
           <li key={movie.id}>
             <MovieCard
-              title={movie.title}
+              id={movie.id} title={movie.title}
               rating={movie.vote_average}
               posterPath={movie.poster_path}
               releaseDate={movie.release_date}
