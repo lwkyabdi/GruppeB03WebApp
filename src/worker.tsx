@@ -4,7 +4,7 @@ import { Document } from "@/app/Document";
 import { setCommonHeaders } from "@/app/headers";
 import { Home } from "@/app/pages/Home";
 import { SessionUser } from "./features/auth/auth-types";
-import { requireUser, setUser } from "./features/auth/middleware";
+import { ifLoggedIn, requireUser, requireUserPage, setUser } from "./features/auth/middleware";
 import { authRoutes } from "./features/auth/auth-routes";
 import { LoginPage } from "./features/auth/pages/LoginPage";
 import { RegisterPage } from "./features/auth/pages/RegisterPages";
@@ -41,9 +41,9 @@ const app = defineApp([
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
   render(Document, [
     layout(AppLayout, [
-      route("/", Home),
-      route("/login", LoginPage),
-      route("/register", RegisterPage),
+      route("/", [requireUserPage, Home]),
+      route("/login", [ifLoggedIn, LoginPage]),
+      route("/register", [ifLoggedIn, RegisterPage]),
     ]),
   ]),
 ]);
