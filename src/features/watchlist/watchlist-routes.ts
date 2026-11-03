@@ -9,7 +9,7 @@ export const watchlistRoutes = [
     }),
     route("/api/v1/watchlist/:id", {
         get: [requireUser, controller.find],
-        put: [requireUser, controller.update],
+        patch: [requireUser, controller.update],
         delete: [requireUser, controller.remove],
     }),
 ];
