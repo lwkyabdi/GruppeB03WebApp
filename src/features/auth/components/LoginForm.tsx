@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type SubmitEvent } from "react";
+import { useEffect, useState, type SubmitEvent } from "react";
 import { z } from "zod";
 import { signIn } from "../auth-api";
 import { loginSchema } from "../auth-validation";
@@ -14,6 +14,11 @@ export function LoginForm() {
   >({});
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,7 +43,7 @@ export function LoginForm() {
   }
 
     return (
-        <form onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3">
+        <form method="post" onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3">
             <FormField
                 label="E-post"
                 name="email"
@@ -46,7 +51,7 @@ export function LoginForm() {
                 value={email}
                 onChange={setEmail}
                 error={fieldErrors.email?.[0]}
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 autoComplete="email"
             />
             <FormField
@@ -56,13 +61,13 @@ export function LoginForm() {
                 value={password}
                 onChange={setPassword}
                 error={fieldErrors.password?.[0]}
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 autoComplete="current-password"
             />
             
             <button
                 type="submit"
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 className="rounded-md bg-slate-900 px-4 py-2 text-white hover:bg-slate-700 disabled:opacity-50"
             >
                 {isLoading ? "Logger inn..." : "Logg inn"}

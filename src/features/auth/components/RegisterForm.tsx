@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type SubmitEvent } from "react";
+import { useEffect, useState, type SubmitEvent } from "react";
 import { z } from "zod";
 import { signUp } from "../auth-api";
 import { registerSchema } from "../auth-validation";
@@ -15,6 +15,11 @@ export function RegisterForm() {
   >({});
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,14 +44,14 @@ export function RegisterForm() {
   }
 
     return (
-        <form onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3">
+        <form method="post" onSubmit={onSubmit} noValidate className="mt-6 flex flex-col gap-3">
             <FormField
                 label="Navn"
                 name="name"
                 value={name}
                 onChange={setName}
                 error={fieldErrors.name?.[0]}
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 autoComplete="name"
             />
             <FormField
@@ -56,7 +61,7 @@ export function RegisterForm() {
                 value={email}
                 onChange={setEmail}
                 error={fieldErrors.email?.[0]}
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 autoComplete="email"
             />
             <FormField
@@ -66,13 +71,13 @@ export function RegisterForm() {
                 value={password}
                 onChange={setPassword}
                 error={fieldErrors.password?.[0]}
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 autoComplete="new-password"
             />
 
             <button
                 type="submit"
-                disabled={isLoading}
+                disabled={!isReady || isLoading}
                 className="rounded-md bg-slate-900 px-4 py-2 text-white hover:bg-slate-700 disabled:opacity-50"
             >
                 {isLoading ? "Oppretter bruker..." : "Registrer deg"}
