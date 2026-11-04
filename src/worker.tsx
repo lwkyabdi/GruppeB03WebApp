@@ -12,10 +12,8 @@ import { authRoutes } from "./features/auth/auth-routes";
 import { LoginPage } from "./features/auth/pages/LoginPage";
 import { RegisterPage } from "./features/auth/pages/RegisterPages";
 import { AppLayout } from "./app/components/layout/AppLayout";
-import { watch } from "node:fs";
 import { watchlistRoutes } from "@/features/watchlist/watchlist-routes";
 import { WatchlistPage } from "@/features/watchlist/pages/WatchlistPage";
-import { FavoritesPage } from "@/features/watchlist/pages/FavoritesPage";
 
 /**
  * Alt som ligger på `ctx` for én forespørsel.
@@ -33,7 +31,6 @@ const app = defineApp([
   setUser,
   ...watchlistRoutes,
   ...authRoutes,
-  route("/api/status", () => Response.json({ status: "ok", version: "0.1.0" })),
 
   route("/api/me", [
   requireUser,
@@ -51,13 +48,12 @@ const app = defineApp([
   // Sider. render(Document, [...]) pakker dem i et helt HTML-dokument.
   render(Document, [
     layout(AppLayout, [
-      route("/watchlist", [requireUserPage, WatchlistPage]),
-      route("/favorites", [requireUserPage, FavoritesPage]),
       route("/", [requireUserPage, Home]),
       route("/login", [ifLoggedIn, LoginPage]),
       route("/register", [ifLoggedIn, RegisterPage]),
-      route("/search", SearchPage),
-      route("/movies/:id", MovieDetailsPage),
+      route("/search", [requireUserPage, SearchPage]),
+      route("/movies/:id", [requireUserPage, MovieDetailsPage]),
+      route("/watchlist", [requireUserPage, WatchlistPage]),
     ]),
   ]),
 ]);

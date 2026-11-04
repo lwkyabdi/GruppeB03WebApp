@@ -1,3 +1,5 @@
+import { AddToWatchlistButton } from "@/features/watchlist/components/AddToWatchlistButton";
+
 type MovieCardProps = {
   id: number;
   title: string;
@@ -30,6 +32,10 @@ export function MovieCard({
         <p className="movie-rating">TMDB-rating: {rating === undefined ? "–" : `${rating.toFixed(1)} / 10`}
         </p>
       </div>
-    </a></article>
+    </a>
+    <AddToWatchlistButton
+    movie={{ tmdbId: id, title, posterPath: posterPath ?? null }}
+  />
+    </article>
   );
 }

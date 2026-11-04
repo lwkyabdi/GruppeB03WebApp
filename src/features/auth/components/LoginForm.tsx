@@ -34,7 +34,7 @@ export function LoginForm() {
 +      setError(result.error.message);
       return;
     }
-    window.location.href = "/";
+    window.location.replace("/");
   }
 
     return (
