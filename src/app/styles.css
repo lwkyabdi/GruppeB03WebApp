@@ -14,6 +14,14 @@
     font-family: system-ui, sans-serif;
   }
 
+  select {
+    color-scheme: dark;
+  }
+
+  select, option {
+    background-color: var(--color-panel);
+    color: #f3f2fa;
+  }
   h1 {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 750;
@@ -36,40 +44,6 @@
 }
 
 @layer components {
-  .site-header {
-    border-bottom: 1px solid var(--color-line);
-    background: var(--color-panel);
-  }
-
-  .header-inner {
-    max-width: 1200px;
-    margin: auto;
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .brand {
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-  }
-
-  .brand::before {
-    content: "M";
-    display: inline-grid;
-    place-items: center;
-    background: var(--color-primary);
-    border-radius: 8px;
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    font-size: 0.85rem;
-  }
-
   .navigation {
     display: flex;
     flex-wrap: wrap;
@@ -259,11 +233,6 @@
   @media (max-width: 480px) {
     .page-container {
       padding: 28px 16px;
-    }
-
-    .header-inner {
-      padding: 16px;
-      gap: 12px;
     }
 
     .navigation {
