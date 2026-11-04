@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { addToWatchlist } from "../actions";
 
 type AddToWatchlistButtonProps = {
@@ -11,6 +11,11 @@ export function AddToWatchlistButton({ movie }: AddToWatchlistButtonProps) {
   const [added, setAdded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   function onClick() {
     setError(null);
@@ -32,7 +37,7 @@ export function AddToWatchlistButton({ movie }: AddToWatchlistButtonProps) {
         type="button"
         className="button"
         onClick={onClick}
-        disabled={isPending || added}
+        disabled={!isReady || isPending || added}
       >
         {isPending ? "Legger til..." : added ? "I watchlisten" : "Legg til i watchlist"}
       </button>
