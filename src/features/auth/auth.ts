@@ -3,6 +3,7 @@ import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import { env } from "cloudflare:workers";
 import { db } from "@/db";
 import { account, session, user, verification } from "@/db/schema";
+import { bearer } from "better-auth/plugins";
 
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
@@ -15,4 +16,5 @@ export const auth = betterAuth({
         enabled: true,
         minPasswordLength: 8
     },
+    plugins: [bearer()],
 });
