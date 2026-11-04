@@ -12,7 +12,6 @@ import { authRoutes } from "./features/auth/auth-routes";
 import { LoginPage } from "./features/auth/pages/LoginPage";
 import { RegisterPage } from "./features/auth/pages/RegisterPages";
 import { AppLayout } from "./app/components/layout/AppLayout";
-import { watch } from "node:fs";
 import { watchlistRoutes } from "@/features/watchlist/watchlist-routes";
 import { WatchlistPage } from "@/features/watchlist/pages/WatchlistPage";
 
@@ -32,7 +31,6 @@ const app = defineApp([
   setUser,
   ...watchlistRoutes,
   ...authRoutes,
-  route("/api/status", () => Response.json({ status: "ok", version: "0.1.0" })),
 
   route("/api/me", [
   requireUser,

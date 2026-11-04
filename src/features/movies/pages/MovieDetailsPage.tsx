@@ -2,6 +2,7 @@ import { env } from "cloudflare:workers";
 import { z } from "zod";
 import { getMovieDetails } from "../movie-service";
 import type { Movie } from "../tmdb-schema";
+import { AddToWatchlistButton } from "@/features/watchlist/components/AddToWatchlistButton";
 
 const movieIdSchema = z.coerce.number().int().positive();
 
@@ -58,9 +59,13 @@ export async function MovieDetailsPage({ params, response }: MovieDetailsPagePro
             <p className="movie-rating">TMDB-rating: {movie.vote_average.toFixed(1)} / 10</p>
             <h2>Om filmen</h2>
             <p>{movie.overview || "Ingen beskrivelse tilgjengelig."}</p>
-            <button type="button" className="button" disabled>
-              Legg til i watchlist
-            </button>
+            <AddToWatchlistButton
+              movie={{
+                tmdbId: movie.id,
+                title: movie.title,
+                posterPath: movie.poster_path,
+              }}
+            />
           </div>
         </article>
       )}
