@@ -35,7 +35,7 @@ export function RegisterForm() {
       setError(result.error.message);
       return;
     }
-    window.location.href = "/";
+    window.location.replace("/");
   }
 
     return (

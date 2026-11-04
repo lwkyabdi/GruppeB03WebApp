@@ -18,7 +18,7 @@ export function LogoutButton() {
       setError(result.error.message);
       return;
     }
-    window.location.href = "/login";
+    window.location.replace("/login");
   }
 
   return (
