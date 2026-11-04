@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "../auth-api";
 
 export function LogoutButton() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
   const [error, setError] = useState<string | null>(null);
 
   async function onClick() {
@@ -26,7 +31,7 @@ export function LogoutButton() {
       <button
         type="button"
         onClick={onClick}
-        disabled={isLoading}
+        disabled={!isReady || isLoading}
         className= "rounded-md border px-3 py-1 hover:bg-slate-50 disabled:opacity-10"
       >
         {isLoading ? "Logger ut..." : "Logg ut"}

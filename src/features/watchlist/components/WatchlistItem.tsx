@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { navigate } from "rwsdk/client";
 import { removeEntry, toggleFavorite } from "../actions";
 import type { WatchlistDTO } from "../watchlist-mapper";
@@ -26,6 +26,11 @@ export function WatchlistItem({ entry }: { entry: WatchlistDTO }) {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   const toggle = () => {
     setError(null);
@@ -94,7 +99,7 @@ export function WatchlistItem({ entry }: { entry: WatchlistDTO }) {
         <button
           type="button"
           onClick={toggle}
-          disabled={isPending}
+          disabled={!isReady || isPending}
           aria-pressed={favorite}
           aria-label={favorite ? "Fjern fra favoritter" : "Legg til i favoritter"}
           className="text-xl disabled:opacity-50"
@@ -107,6 +112,7 @@ export function WatchlistItem({ entry }: { entry: WatchlistDTO }) {
         <button
           type="button"
           onClick={() => setEditing((open) => !open)}
+          disabled={!isReady}
           className="rounded border border-slate-300 px-2 py-1 text-xs hover:bg-slate-50"
         >
           {editing ? "Lukk" : "Rediger"}
@@ -114,7 +120,7 @@ export function WatchlistItem({ entry }: { entry: WatchlistDTO }) {
         <button
           type="button"
           onClick={remove}
-          disabled={isPending}
+          disabled={!isReady || isPending}
           className="rounded border border-red-200 px-2 py-1 text-xs text-red-700 hover:bg-red-50 disabled:opacity-50"
         >
           Slett
