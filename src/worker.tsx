@@ -18,8 +18,7 @@ import { WatchlistPage } from "@/features/watchlist/pages/WatchlistPage";
 /**
  * Alt som ligger på `ctx` for én forespørsel.
  *
- * Tom nå. Legger dere til `user` her, blir `ctx.user` typet i hele appen,
- * fordi types/rw.d.ts mater denne typen inn i rwsdk.
+ * ctx.user inneholder innlogget bruker. types/rw.d.ts deler typen med rwsdk.
  */
 export type AppContext = {
   user: SessionUser | null;
