@@ -46,7 +46,7 @@ Kjør kommandoene fra prosjektmappen.
 
    ```bash
    npm run migrate:dev
-   yoour database may not be available to serve requests during the migration, trykk Y 
+   your database may not be available to serve requests during the migration, trykk Y 
    npm run dev
    ```
 
